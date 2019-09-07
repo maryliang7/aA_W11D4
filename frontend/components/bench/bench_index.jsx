@@ -3,11 +3,13 @@ import BenchIndexItem from './bench_index_item';
 
 export default class BenchIndex extends React.Component {
     componentDidMount(){
-        this.props.fetchBenches();
+        console.log(this.props);
+        // this.props.fetchBenches(this.props.bounds);
+
     }
 
     render(){
-        console.log(this.props);
+        // console.log(this.props);
         return(
             <div>
                 <ul>

@@ -6,9 +6,18 @@ export default class MarkerManager {
 
     updateMarkers(benches) {
         console.log("time to update");
+        let tempBenches = {};
+
         benches.forEach((bench) => {
             this.createMarkerFromBench(bench);
+            tempBenches[bench.id] = bench;
         });
+
+        for (let bench in this.markers) {
+            if (!tempBenches[bench.id]) {
+                this.removeMarker(bench)
+            }
+        }
     }
 
     createMarkerFromBench(bench) {
@@ -20,6 +29,10 @@ export default class MarkerManager {
             })
             this.markers[bench.id] = newMark;
         }
+    }
+
+    removeMarker(bench) {
+        delete this.markers[bench.id];
     }
 
     render() {

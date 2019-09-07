@@ -1,14 +1,15 @@
 class Api::BenchesController < ApplicationController
 
     def index
-        @benches = Bench.in_bounds(params[:bounds])
+        @benches = Bench.in_bounds(params[:filters])
         render :index
     end
 
     def create
         @bench = Bench.new(bench_params)
-        
-        if @user.save
+
+        if @bench.save
+
             render :show
         else
             render json: @bench.errors.full_messages, status: 404
@@ -17,7 +18,7 @@ class Api::BenchesController < ApplicationController
 
     private
     def bench_params
-        params.require(:bench).permit(:description, :lat, :lng)
+        params.require(:bench).permit(:description, :lat, :lng, :seating)
     end
 
 end
